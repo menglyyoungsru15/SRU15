@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>កសិកម្មទំនើប - ឈានមុខគេផ្នែកបច្ចេកវិទ្យាកសិកម្ម</title>
+    <link rel="stylesheet" href="index.css">
+    <!-- Font Awesome សម្រាប់រូបតំណាង (Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts ភាសាខ្មែរ -->
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Kantumruy Pro', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            color: #333;
+        }
+        .price-card {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            position: relative;
+        }
+        .price-card img.fertilizer-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 3px solid #4CAF50;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .price-card img.fertilizer-img:hover {
+            opacity: 0.9;
+        }
+        .card-img img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .card-img img:hover {
+            opacity: 0.9;
+        }
+        .price-card-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .price-card-content ul {
+            flex-grow: 1;
+            padding-left: 0;
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        .price-card-content ul li {
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+        .price-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .sale-price {
+            color: #e74c3c;
+            font-size: 22px;
+            font-weight: 700;
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .action-icon {
+            position: relative;
+            font-size: 20px;
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+        .action-icon:hover {
+            color: #4CAF50;
+        }
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background-color: #e74c3c;
+            color: white;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+        
+        .instruction-banner {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4CAF50;
+            padding: 12px 20px;
+            margin: 20px auto;
+            max-width: 1100px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #2e7d32;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .account-section {
+            display: none; 
+            max-width: 600px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        .account-section.active-account {
+            display: block;
+        }
+        .account-section h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+        .account-form .form-group {
+            margin-bottom: 15px;
+        }
+        .account-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #444;
+            font-size: 14px;
+        }
+        .account-form input, 
+        .account-form select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Kantumruy Pro', sans-serif;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .account-form input:focus, 
+        .account-form select:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+        .account-btn {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-family: 'Kantumruy Pro', sans-serif;
+            margin-top: 10px;
+        }
+        .account-btn:hover {
+            background-color: #45a049;
+        }
+        .auth-switch {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        .auth-switch a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .cart-section {
+            display: none;
+            max-width: 600px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        .cart-section.active-cart {
+            display: block;
+        }
+        .cart-section h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+        .cart-items-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 15px;
+            color: #444;
+        }
+        .cart-item-remove {
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .cart-total {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: right;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .payment-qr-container {
+            text-align: center;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px dashed #ccc;
+            display: none;
+        }
+        .payment-qr-container.active-qr {
+            display: block;
+        }
+        .payment-qr-container img {
+            width: 160px;
+            height: 160px;
+            object-fit: contain;
+            margin-top: 10px;
+        }
+        .checkout-btn {
+            width: 100%;
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-family: 'Kantumruy Pro', sans-serif;
+        }
+        .checkout-btn:hover {
+            background-color: #c0392b;
+        }
+
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        .image-modal.active-modal {
+            display: flex;
+        }
+        .image-modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .image-modal-content img {
+            width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+        }
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: #fff;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .modal-close:hover {
+            color: #e74c3c;
+        }
+
+        .pricing-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ផ្នែក Header / Navigation Bar -->
+    <header>
+        <div class="logo">
+            <h2><i class="fa-solid fa-seedling"></i> កសិកម្ម<span>ទំនើប</span></h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">ទំព័រដើម</a></li>
+                <li><a href="#products">ផលិតផល</a></li>
+                <li><a href="#pricing">ជីកសិកម្មធម្មជាតិ</a></li>
+                <li><a href="#contact">ទំនាក់ទំនង</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <a href="#account" id="account-toggle-btn" class="action-icon" title="គណនីរបស់ខ្ញុំ"><i class="fa-solid fa-user"></i></a>
+            <a href="#cart" id="cart-toggle-btn" class="action-icon" title="កន្ត្រកទំនិញ">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-badge" id="cart-count">0</span>
+            </a>
+            <a href="#contact" class="header-btn">ប្រឹក្សាយោបល់</a>
+        </div>
+    </header>
+
+    <!-- ផ្នែកណែនាំរហ័សសម្រាប់អ្នកប្រើប្រាស់ -->
+    <div class="instruction-banner">
+        <i class="fa-solid fa-circle-info fa-lg"></i>
+        <span><strong>ការណែនាំ:</strong> លោកអ្នកអាចចុចលើរូបភាពផលិតផលដើម្បីមើលទំហំធំ ចុចប៊ូតុង "បន្ថែមទៅកន្ត្រក" ឬចូលគណនីជា Admin (Password: ly2324) ដើម្បីផុសរូបភាពថ្មីៗ។</span>
+    </div>
+
+    <!-- ផ្នែក Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="sub-title"><i class="fa-solid fa-leaf"></i> អនាគតនៃវិស័យកសិកម្ម</span>
+            <h1>បច្ចេកវិទ្យា និងផលិតផលកសិកម្មកម្រិតខ្ពស់</h1>
+            <p>ជួយបង្កើនទិន្នផលដំណាំ ទប់ទល់នឹងការប្រែប្រួលអាកាសធាតុ និងលើកកម្ពស់ជីវភាពកសិករខ្មែរឱ្យកាន់តែរីកចម្រើន។</p>
+            <div class="hero-btns">
+                <a href="#products" class="btn-primary">ស្វែងរកផលិតផល</a>
+                <a href="#contact" class="btn-outline">ទាក់ទងមកយើង</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ផ្នែកស្ថិតិ (Stats Section) -->
+    <section class="stats">
+        <div class="stat-box">
+            <h3>១០០+</h3>
+            <p>សហគមន៍កសិកម្ម</p>
+        </div>
+        <div class="stat-box">
+            <h3>៥,០០០+</h3>
+            <p>កសិករគាំទ្រ</p>
+        </div>
+        <div class="stat-box">
+            <h3>៥០+</h3>
+            <p>ប្រភេទផលិតផល</p>
+        </div>
+        <div class="stat-box">
+            <h3>១០ឆ្នាំ</h3>
+            <p>បទពិសោធន៍</p>
+        </div>
+    </section>
+
+    <!-- ផ្នែកផលិតផល (Products Section) -->
+    <section id="products" class="products-section">
+        <div class="section-title">
+            <span class="badge">ផលិតផលប្រណីត</span>
+            <h2>ផលិតផល និងសេវាកម្មលេចធ្លោ</h2>
+            <p>ជ្រើសរើសយកដំណោះស្រាយដ៏ល្អបំផុតសម្រាប់កសិដ្ឋានរបស់អ្នក</p>
+        </div>
+        
+        <div class="card-container" id="dynamic-product-list">
+            <!-- កាតទី ១ -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="K09" alt="ជីកសិកម្ម" class="zoomable-img">
+                    <span class="tag">លក់ដាច់បំផុត</span>
+                </div>
+                <div class="card-body">
+                    <h3>ជីកសិកម្មធម្មជាតិ</h3>
+                    <p>ជួយឱ្យដំណាំលូតលាស់លឿន ដីមានជីជាតិល្អ និងមិនប៉ះពាល់ដល់បរិស្ថានឡើយ។</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                        <span style="color: #e74c3c; font-weight: bold; font-size: 16px;">៣៥$</span>
+                        <button class="add-to-cart-btn" data-name="ជីកសិកម្មធម្មជាតិ" data-price="15" style="background: #4CAF50; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-family: 'Kantumruy Pro'; font-size: 14px;">បន្ថែមទៅកន្ត្រក <i class="fa-solid fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- កាតទី ២ -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="K10" alt="គ្រាប់ពូជ" class="zoomable-img">
+                    <span class="tag">គុណភាពខ្ពស់</span>
+                </div>
+                <div class="card-body">
+                    <h3>ពូជដំណាំល្អៗ</h3>
+                    <p>គ្រាប់ពូជស្រូវ និងបន្លែបង្ការដែលមានគុណភាពខ្ពស់ ធន់នឹងជំងឺ និងរាំងស្ងួត។</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                        <span style="color: #e74c3c; font-weight: bold; font-size: 16px;">១៥$</span>
+                        <button class="add-to-cart-btn" data-name="ពូជដំណាំល្អៗ" data-price="10" style="background: #4CAF50; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-family: 'Kantumruy Pro'; font-size: 14px;">បន្ថែមទៅកន្ត្រក <i class="fa-solid fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- កាតទី ៣ -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="K11" alt="គ្រឿងយន្តកសិកម្ម" class="zoomable-img">
+                    <span class="tag">ទំនើប</span>
+                </div>
+                <div class="card-body">
+                    <h3>គ្រឿងយន្តកសិកម្មទំនើប</h3>
+                    <p>ម៉ាស៊ីនច្រូត ត្រាក់ទ័រ និងឧបករណ៍បូមទឹកសន្សំសំចៃកម្លាំង និងពេលវេលា។</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                        <span style="color: #e74c3c; font-weight: bold; font-size: 16px;">៧៥០០$</span>
+                        <button class="add-to-cart-btn" data-name="គ្រឿងយន្តកសិកម្មទំនើប" data-price="1500" style="background: #4CAF50; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-family: 'Kantumruy Pro'; font-size: 14px;">បន្ថែមទៅកន្ត្រក <i class="fa-solid fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- កាតទី ៤ -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="K02" alt="ដ្រូនបាញ់ថ្នាំ" class="zoomable-img">
+                    <span class="tag">បច្ចេកវិទ្យា AI</span>
+                </div>
+                <div class="card-body">
+                    <h3>ដ្រូនបាញ់ថ្នាំកសិកម្ម</h3>
+                    <p>ដ្រូនបញ្ជាពីចម្ងាយឆ្លាតវៃ ជួយបាញ់ថ្នាំ ឬជីលើដំណាំបានរហ័ស និងត្រឹមត្រូវ។</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                        <span style="color: #e74c3c; font-weight: bold; font-size: 16px;">៣៥០០$</span>
+                        <button class="add-to-cart-btn" data-name="ដ្រូនបាញ់ថ្នាំកសិកម្ម" data-price="2500" style="background: #4CAF50; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-family: 'Kantumruy Pro'; font-size: 14px;">បន្ថែមទៅកន្ត្រក <i class="fa-solid fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- កាតទី ៥ -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="K03.jpg" alt="ប្រព័ន្ធតំណក់ទឹក" class="zoomable-img">
+                    <span class="tag">សន្សំសំចៃ</span>
+                </div>
+                <div class="card-body">
+                    <h3>ប្រព័ន្ធស្រោចស្រពតំណក់ទឹក</h3>
+                    <p>ប្រព័ន្ធទឹកអូតូកម្រិតខ្ពស់ ជួយសន្សំសំចៃទឹក និងចែកចាយទឹកដល់គល់ដំណាំស្មើគ្នា។</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                        <span style="color: #e74c3c; font-weight: bold; font-size: 16px;">៤៥០$</span>
+                        <button class="add-to-cart-btn" data-name="ប្រព័ន្ធស្រោចស្រពតំណក់ទឹក" data-price="350" style="background: #4CAF50; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-family: 'Kantumruy Pro'; font-size: 14px;">បន្ថែមទៅកន្ត្រក <i class="fa-solid fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- កាតទី ៦ -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="K05" alt="ថ្នាំការពារសត្វល្អិតសរីរាង្គ" class="zoomable-img">
+                    <span class="tag">សុវត្ថិភាពខ្ពស់</span>
+                </div>
+                <div class="card-body">
+                    <h3>ថ្នាំការពារសត្វល្អិតសរីរាង្គ</h3>
+                    <p>ផលិតផលជីវសាស្រ្តទប់ស្កាត់សត្វល្អិតបំផ្លាញដំណាំ ដោយមិនមានជាតិពុលตกค้าง។</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                        <span style="color: #e74c3c; font-weight: bold; font-size: 16px;">១៥$</span>
+                        <button class="add-to-cart-btn" data-name="ថ្នាំការពារសត្វល្អិតសរីរាង្គ" data-price="12" style="background: #4CAF50; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-family: 'Kantumruy Pro'; font-size: 14px;">បន្ថែមទៅកន្ត្រក <i class="fa-solid fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- កាតទី ៧ -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="K08" alt="ឧបករណ៍វាស់ដី" class="zoomable-img">
+                    <span class="tag">វិទ្យាសាស្ត្រ</span>
+                </div>
+                <div class="card-body">
+                    <h3>ឧបករណ៍វាស់ជាតិដី និងសំណើម</h3>
+                    <p>ឧបករណ៍ឌីជីថលឆែកមើលកម្រិត pH ធាតុចិញ្ចឹម និងសំណើមដីបានយ៉ាងឆាប់រហ័ស។</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                        <span style="color: #e74c3c; font-weight: bold; font-size: 16px;">៤៥$</span>
+                        <button class="add-to-cart-btn" data-name="ឧបករណ៍វាស់ជាតិដី និងសំណើម" data-price="25" style="background: #4CAF50; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-family: 'Kantumruy Pro'; font-size: 14px;">បន្ថែមទៅកន្ត្រក <i class="fa-solid fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- កាតទី ៨ -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="K07" alt="សំណាញ់បាំងពន្លឺ" class="zoomable-img">
+                    <span class="tag">ធន់រឹងមាំ</span>
+                </div>
+                <div class="card-body">
+                    <h3>សំណាញ់បាំងពន្លឺ និងផ្ទះសំណាញ់</h3>
+                    <p>សំណាញ់ការពារកម្ដៅថ្ងៃខ្លាំង និងសត្វល្អិត សម្រាប់ដាំបន្លែអ៊ីដ្រូប៉ូនិក និងសរីរាង្គ។</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                        <span style="color: #e74c3c; font-weight: bold; font-size: 16px;">១៥០$</span>
+                        <button class="add-to-cart-btn" data-name="សំណាញ់បាំងពន្លឺ និងផ្ទះសំណាញ់" data-price="85" style="background: #4CAF50; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-family: 'Kantumruy Pro'; font-size: 14px;">បន្ថែមទៅកន្ត្រក <i class="fa-solid fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- កាតទី ៩ -->
+            <div class="card">
+                <div class="card-img">
+                    <img src="K06" alt="ម៉ាស៊ីនកិនចំណី" class="zoomable-img">
+                    <span class="tag">ពហុមុខងារ</span>
+                </div>
+                <div class="card-body">
+                    <h3>ម៉ាស៊ីនកិន និងកែច្នៃចំណីសត្វ</h3>
+                    <p>ម៉ាស៊ីនកិនសំបកកាកសំណល់កសិកម្មធ្វើជាចំណីសត្វចិញ្ចឹម កាត់បន្ថយការចំណាយ។</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                        <span style="color: #e74c3c; font-weight: bold; font-size: 16px;">៥៥០$</span>
+                        <button class="add-to-cart-btn" data-name="ម៉ាស៊ីនកិន និងកែច្នៃចំណីសត្វ" data-price="450" style="background: #4CAF50; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-family: 'Kantumruy Pro'; font-size: 14px;">បន្ថែមទៅកន្ត្រក <i class="fa-solid fa-cart-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ផ្នែកលក់ជីកសិកម្ម (គ្មានការបញ្ចុះតម្លៃ - សរុប ៦ ប្រភេទ) -->
+    <section id="pricing" class="pricing-section">
+        <div class="section-title">
+            <span class="badge">ផលិតផលជីគុណភាពខ្ពស់</span>
+            <h2>ប្រភេទជីកសិកម្ម និងតម្លៃស្តង់ដារ</h2>
+            <p>ជម្រើសជីសរីរាង្គ និងគីមីធម្មជាតិដែលមានតម្លៃសមរម្យសម្រាប់កសិករយើង</p>
+        </div>
+
+        <div class="pricing-container">
+            <!-- ផលិតផលទី ១ -->
+            <div class="price-card">
+                <img src="K12" alt="ជីកំប៉ុស្តសរីរាង្គ" class="fertilizer-img zoomable-img">
+                <div class="price-card-content">
+                    <h3>ជីកំប៉ុស្តសរីរាង្គ</h3>
+                    <div class="price-box">
+                        <span class="sale-price" data-price="12">៣៥$ <span>/ ៥០គីឡូក្រាម</span></span>
+                    </div>
+                    <ul>
+                        <li><i class="fa-solid fa-check" style="color: #4CAF50;"></i> ធ្វើឱ្យដីផុយស្រួយល្អ</li>
+                        <li><i class="fa-solid fa-check" style="color: #4CAF50;"></i> សាកសមសម្រាប់ដំណាំបន្លែគ្រប់ប្រភេទ</li>
+                        <li><i class="fa-solid fa-check" style="color: #4CAF50;"></i> មិនមានសារធាតុគីមីបំផ្លាញដី</li>
+                    </ul>
+                    <button class="price-btn add-to-cart-btn" data-name="ជីកំប៉ុស្តសរីរាង្គ" data-price="12">បន្ថែមទៅកន្ត្រក</button>
+                </div>
+            </div>
+
+            <!-- ផលិតផលទី ២ -->
+            <div class="price-card popular">
+                <span class="pop-tag">លក់ដាច់បំផុត</span>
+                <img src="K15" alt="ជីទឹកអរម៉ូនរុក្ខជាតិ" class="fertilizer-img zoomable-img">
+                <div class="price-card-content">
+                    <h3>ជីទឹកអរម៉ូនរុក្ខជាតិ</h3>
+                    <div class="price-box">
+                        <span class="sale-price" data-price="20">២៥$ <span>/ ១លីត្រ</span></span>
+                    </div>
+                    <ul>
+                        <li><i class="fa-solid fa-check" style="color: #4CAF50;"></i> បង្កើនល្បឿនលូតលាស់ស្លឹក និងឬស</li>
+                        <li><i class="fa-solid fa-check" style="color: #4CAF50;"></i> ជួយឱ្យផ្លែធំ និងឆាប់ទុំល្អ</li>
+                        <li><i class="fa-solid fa-check" style="color: #4CAF50;"></i> ធន់នឹងការខ្វះទឹក និងជំងឺស្រ្តេស</li>
+                    </ul>
+                    <button class="price-btn active-btn add-to-cart-btn" data-name="ជីទឹកអរម៉ូនរុក្ខជាតិ" data-price="20">បន្ថែមទៅកន្ត្រក</button>
+                </div>
+            </div>
+
+            <!-- ផលិតផលទី ៣ -->
+            <div class="price-card">
+                <img src="K14" alt="ជីកសិកម្ម NPK ពិសេស" class="fertilizer-img zoomable-img">
+                <div class="price-card-content">
+                    <h3>ជីកសិកម្ម NPK ពិសេស</h3>
+                    <div class="price-box">
+                        <span class="sale-price" data-price="35">៣៥$ <span>/ ៥០គីឡូក្រាម</span></span>
+                    </div>
+                    <ul>
+                        <li><i class="fa-solid fa-check" style="color: #4CAF50;"></i> មានសារធាតុចិញ្ចឹមគ្រាប់ពេញលេញ</li>
+                        <li><i class="fa-solid fa-check" style="color: #4CAF50;"></i> សាកសមសម្រាប់ស្រូវ និងដំណាំឧស្សាហកម្ម</li>
+                        <li><i class="fa-solid fa-check" style="color: #4CAF50;"></i> ជួយឱ្យទិន្នផលកើនឡើងខ្ពស់</li>
+                    </ul>
+                    <button class="price-btn add-to-cart-btn" data-name="ជីកសិកម្ម NPK ពិសេស" data-price="35">បន្ថែមទៅកន្ត្រក</button>
+                </div>
+            </div>
+
+            <!-- ផលិតផលទី ៤ -->
+            <div class="price-card">
+                <img src="K16" alt="ជីកំប៉ុស្តលាមកសត្វចម្រាញ់" class="fertilizer-img zoomable-img">
+                <div class="price-card-content">
+                    <h3>ជីកំប៉ុស្តលាមកសត្វចម្រាញ់</h3>
+                    <div class="price-box">
+                        <span class="sale-price" data-price="18">២០$ <span>/ ៥០គីឡូក្រាម</span></span>
+                    </div>
+                    <ul>
+                        <li><i class="fa-solid fa-check" style="color: #4CAF50;"></i> គ្មានក្លិនស្អុយ ឆ្លងកាត់ការ στេរីល</li>
+                        <li><i class="fa-solid fa-check" style="color: #4CAF50;"></i> បង្កើនបាក់តេរីមានប្រយោជន៍ក្នុងដី</li>
+                        <li><i class="fa-solid fa-check" style="color: #4CAF50;"></i> សាកសមខ្លាំងសម្រាប់ដាំដំណាំហូបផ្លែ</li>
+                    </ul>
+                    <button class="price-btn add-to-cart-btn" data-name="ជីកំប៉ុស្តលាមកសត្វចម្រាញ់" data-price="18">បន្ថែមទៅកន្ត្រក</button>
+                </div>
+            </div>
+
+            <!-- ផលិតផលទី ៥ -->
+            <div class="price-card">
+                <img src="K17" alt="ជីសរីរាង្គបំប៉នឬស" class="fertilizer-img zoomable-img">
+                <div class="price-card-content">
+                    <h3>ជីទឹកសរីរាង្គបំប៉នឬស</h3>
+                    <div class="price-box">
+                        <span class="sale-price" data-price="24">៥០$ <span>/ ២លីត្រ</span></span>
+                    </div>
+                    <ul>
+                        <li><i class="fa-solid fa-check" style="color: #4CAF50;"></i> ជំរុញការលូតលាស់ប្រព័ន្ធឬសដុះជ្រៅ</li>
+                        <li><i class="fa-solid fa-check" style="color: #4CAF50;"></i> ការពារការងាប់ឬស និងរលួយគល់</li>
+                        <li><i class="fa-solid fa-check" style="color: #4CAF50;"></i> ជួយឱ្យដើមរឹងមាំតាំងពីវ័យក្មេង</li>
+                    </ul>
+                    <button class="price-btn add-to-cart-btn" data-name="ជីសរីរាង្គបំប៉នឬស" data-price="24">បន្ថែមទៅកន្ត្រក</button>
+                </div>
+            </div>
+
+            <!-- ផលិតផលទី ៦ -->
+            <div class="price-card">
+                <img src="K18" alt="ជីគ្រាប់មីក្រូហ្វីលសរីរាង្គ" class="fertilizer-img zoomable-img">
+                <div class="price-card-content">
+                    <h3>ជីគ្រាប់មីក្រូហ្វីលសរីរាង្គ</h3>
+                    <div class="price-box">
+                        <span class="sale-price" data-price="45">៤៥$ <span>/ ២៥គីឡូក្រាម</span></span>
+                    </div>
+                    <ul>
+                        <li><i class="fa-solid fa-check" style="color: #4CAF50;"></i> បច្ចេកវិទ្យាទំនើបងាយរលាយក្នុងទឹក</li>
+                        <li><i class="fa-solid fa-check" style="color: #4CAF50;"></i> ដំណាំស្រូបយកសារធាតុចិញ្ចឹមភ្លាមៗ</li>
+                        <li><i class="fa-solid fa-check" style="color: #4CAF50;"></i> បង្កើនទិន្នផលទ្វេដងប្រកបដោយសុវត្ថិភាព</li>
+                    </ul>
+                    <button class="price-btn add-to-cart-btn" data-name="ជីគ្រាប់មីក្រូហ្វីលសរីរាង្គ" data-price="45">បន្ថែមទៅកន្ត្រក</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal សម្រាប់បង្ហាញរូបភាពធំ -->
+    <div class="image-modal" id="imageModal">
+        <div class="image-modal-content">
+            <span class="modal-close" id="modalClose">&times;</span>
+            <img id="modalImg" src="" alt="Zoomed Product Image">
+        </div>
+    </div>
+
+    <!-- ផ្នែកកន្ត្រកទំនិញ និងទូទាត់ប្រាក់ -->
+    <section id="cart" class="cart-section">
+        <h2><i class="fa-solid fa-cart-shopping"></i> កន្ត្រកទំនិញរបស់អ្នក</h2>
+        <p style="text-align: center; font-size: 13px; color: #666; margin-bottom: 15px;">ពិនិត្យទំនិញដែលបានជ្រើសរើស និងធ្វើការទូទាត់ប្រាក់នៅខាងក្រោម។</p>
+        <ul class="cart-items-list" id="cart-items-container">
+            <!-- បញ្ជីទំនិញនឹងបង្ហាញទីនេះ -->
+        </ul>
+        <div class="cart-total" id="cart-total-price">សរុបទាំងអស់: 0$</div>
+        
+        <button type="button" class="checkout-btn" id="checkout-btn">ទូទាត់ប្រាក់តាម QR Code</button>
+
+        <div class="payment-qr-container" id="payment-qr-box">
+            <p><strong>សូមស្កេន QR Code ខាងក្រោមដើម្បីបង់ប្រាក់:</strong></p>
+            <img id="dynamic-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=AgricultureStorePayment" alt="Payment QR Code">
+            <p style="font-size: 13px; color: #666; margin-top: 5px;">ABA / ACLEDA / TrueMoney</p>
+        </div>
+    </section>
+
+    <!-- ផ្នែកគណនីអតិថិជន / Admin -->
+    <section id="account" class="account-section">
+        <div id="auth-container">
+            <!-- ផ្នែកចុះឈ្មោះ / ចូលគណនី -->
+            <div id="login-register-view">
+                <h2 id="form-title"><i class="fa-solid fa-user-circle"></i> ចូលគណនី / ចុះឈ្មោះ</h2>
+                
+                <!-- ຟอร์មចូលគណនី -->
+                <form class="account-form" id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">អ៊ីម៉ែល ឬ ឈ្មោះអ្នកប្រើ (Username/Email)</label>
+                        <input type="text" id="login-email" placeholder="បញ្ចូលអ៊ីម៉ែល ឬ admin" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">ពាក្យសម្ងាត់ (Password)</label>
+                        <input type="password" id="login-password" placeholder="បញ្ចូលពាក្យសម្ងាត់" required>
+                    </div>
+                    <button type="submit" class="account-btn">ចូលគណនី</button>
+                    <div class="auth-switch">
+                        ពុំទាន់មានគណនីមែនទេ? <a href="#" id="show-register">ចុះឈ្មោះទីនេះ</a>
+                    </div>
+                </form>
+
+                <!-- ຟอร์មចុះឈ្មោះ -->
+                <form class="account-form" id="register-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="fullname">ឈ្មោះពេញ</label>
+                        <input type="text" id="fullname" placeholder="បញ្ចូលឈ្មោះរបស់អ្នក" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">ភេទ</label>
+                        <select id="gender" required>
+                            <option value="">-- ជ្រើសរើសភេទ --</option>
+                            <option value="ប្រុស">ប្រុស</option>
+                            <option value="ស្រី">ស្រី</option>
+                            <option value="ផ្សេងៗ">ផ្សេងៗ</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="job">មុខរបរ</label>
+                        <input type="text" id="job" placeholder="ឧ. កសិករ, អាជីវករ..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">អាស័យដ្ឋាន</label>
+                        <input type="text" id="address" placeholder="ឃុំ/សង្កាត់ ស្រុក/ខណ្ឌ ខេត្ត/រាជធានី" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">អ៊ីម៉ែល (Email)</label>
+                        <input type="email" id="email" placeholder="example@gmail.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">ពាក្យសម្ងាត់ (Password)</label>
+                        <input type="password" id="password" placeholder="យ៉ាងតិច ៦ខ្ទង់" required>
+                    </div>
+                    <button type="submit" class="account-btn">បង្កើតគណនីឥឡូវនេះ</button>
+                    <div class="auth-switch">
+                        មានគណនីរួចហើយ? <a href="#" id="show-login">ចូលគណនីវិញ</a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- ផ្នែកបង្ហាញ Profile ឬ Admin Dashboard ពេលចូលរួច -->
+            <div id="profile-view" style="display: none;">
+                <h2 id="profile-title">ព័ត៌មានគណនីរបស់អ្នក</h2>
+                <div id="profile-content" style="margin-bottom: 20px; line-height: 1.6;"></div>
+                
+                <!-- ផ្នែក Admin Panel សម្រាប់ផុសរូបភាព -->
+                <div id="admin-panel" style="display: none; background: #e8f5e9; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h3 style="color: #2e7d32; margin-top: 0;"><i class="fa-solid fa-cloud-arrow-up"></i> បន្ថែម / ផុសផលិតផលថ្មី (Admin)</h3>
+                    <form id="post-product-form">
+                        <div class="form-group" style="margin-bottom: 10px;">
+                            <label style="font-size: 13px;">ឈ្មោះផលិតផល:</label>
+                            <input type="text" id="prod-name" placeholder="ឈ្មោះផលិតផល" required style="padding: 8px;">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 10px;">
+                            <label style="font-size: 13px;">តំណភ្ជាប់រូបភាព (Image URL):</label>
+                            <input type="url" id="prod-img" placeholder="https://..." required style="padding: 8px;">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 10px;">
+                            <label style="font-size: 13px;">បរិយាយខ្លីៗ:</label>
+                            <input type="text" id="prod-desc" placeholder="អត្ថន័យផលិតផល..." required style="padding: 8px;">
+                        </div>
+                        <button type="submit" class="account-btn" style="margin-top: 5px; padding: 8px;">ផុសចូលគេហទំព័រ</button>
+                    </form>
+                </div>
+
+                <button type="button" class="account-btn" id="logout-btn" style="background-color: #e74c3c;">ចាកចេញពីគណនី (Logout)</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ផ្នែកទំនាក់ទំនង និង Form -->
+    <section id="contact" class="contact-section">
+        <div class="section-title">
+            <span class="badge">ទាក់ទងមកយើង</span>
+            <h2>ផ្ញើសារសាកសួរព័ត៌មាន ឬកក់សេវាកម្ម</h2>
+            <p>ក្រុមការងារយើងខ្ញុំត្រៀមខ្លួនជាស្រេចដើម្បីជួយលោកអ្នកជានិច្ច</p>
+        </div>
+
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>ព័ត៌មានទំនាក់ទំនង</h3>
+                <p><i class="fa-solid fa-location-dot"></i> ផ្ទះលេខ​២០៣, ផ្លូវជាតិលេខ៦, ខេត្តសៀមរាប</p>
+                <p><i class="fa-solid fa-phone"></i> (+855) 86 609 873 / 98 765 432</p>
+                <p><i class="fa-solid fa-envelope"></i> menglyyong737@gmail.com</p>
+                <div class="social-icons-contact">
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <form class="contact-form">
+                <div class="form-group">
+                    <input type="text" placeholder="ឈ្មោះរបស់អ្នក" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="លេខទូរសព្ទ" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="អ៊ីម៉ែល (បើមាន)">
+                </div>
+                <div class="form-group">
+                    <textarea rows="5" placeholder="សាររបស់អ្នក..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-family: 'Kantumruy Pro';" required></textarea>
+                </div>
+                <button type="submit" style="width: 100%; background-color: #4CAF50; color: white; padding: 12px; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; font-family: 'Kantumruy Pro';">ផ្ញើសារមកយើង</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ផ្នែក Footer -->
+    <footer style="background-color: #2c3e50; color: white; text-align: center; padding: 30px 20px; margin-top: 40px;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 style="margin-bottom: 15px;"><i class="fa-solid fa-seedling"></i> កសិកម្មទំនើប</h2>
+            <p style="font-size: 14px; color: #bbb;">នាំយកបច្ចេកវិទ្យាដើម្បីអនាគតកសិកម្មកម្ពុជា</p>
+            <div style="margin: 20px 0; font-size: 20px;">
+                <a href="#" style="color: white; margin: 0 10px;"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" style="color: white; margin: 0 10px;"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" style="color: white; margin: 0 10px;"><i class="fa-brands fa-telegram"></i></a>
+            </div>
+            <hr style="border-color: #34495e; margin: 20px 0;">
+            <p style="font-size: 13px; color: #95a5a6;">&copy; 2026 កសិកម្មទំនើប. រក្សាសិទ្ធិគ្រប់យ៉ាង.</p>
+        </div>
+    </footer>
+
+    <!-- Javascript សម្រាប់មុខងារផ្សេងៗ -->
+    <script>
+        // 1. មុខងាររូបភាព Modal (Zoom)
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImg');
+        const modalClose = document.getElementById('modalClose');
+
+        document.addEventListener('click', function(e) {
+            if(e.target && e.target.classList.contains('zoomable-img')) {
+                modalImg.src = e.target.src;
+                modal.classList.add('active-modal');
+            }
+        });
+
+        modalClose.addEventListener('click', () => {
+            modal.classList.remove('active-modal');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if(e.target === modal) {
+                modal.classList.remove('active-modal');
+            }
+        });
+
+        // 2. មុខងារបិទបើក (Toggle) កន្ត្រក និង គណនី
+        const cartBtn = document.getElementById('cart-toggle-btn');
+        const cartSection = document.getElementById('cart');
+        cartBtn.addEventListener('click', (e) => { 
+            e.preventDefault(); 
+            document.getElementById('account').classList.remove('active-account'); // បិទគណនី
+            cartSection.classList.toggle('active-cart'); 
+            cartSection.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        const accountBtn = document.getElementById('account-toggle-btn');
+        const accountSection = document.getElementById('account');
+        accountBtn.addEventListener('click', (e) => { 
+            e.preventDefault(); 
+            document.getElementById('cart').classList.remove('active-cart'); // បិទកន្ត្រក
+            accountSection.classList.toggle('active-account'); 
+            accountSection.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // 3. មុខងារកន្ត្រកទំនិញ (Add to Cart)
+        let cartItems = [];
+        const cartCount = document.getElementById('cart-count');
+        const cartContainer = document.getElementById('cart-items-container');
+        const cartTotal = document.getElementById('cart-total-price');
+
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const name = this.getAttribute('data-name');
+                const price = parseFloat(this.getAttribute('data-price'));
+                
+                cartItems.push({ name, price });
+                updateCartUI();
+                
+                // បញ្ចេញពន្លឺបញ្ជាក់ថាបានបញ្ចូល
+                const originalText = this.innerHTML;
+                this.innerHTML = '<i class="fa-solid fa-check"></i> បានបន្ថែម';
+                this.style.backgroundColor = '#2ecc71';
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                    this.style.backgroundColor = '#4CAF50';
+                }, 1500);
+            });
+        });
+
+        function updateCartUI() {
+            cartCount.textContent = cartItems.length;
+            cartContainer.innerHTML = '';
+            let total = 0;
+
+            if (cartItems.length === 0) {
+                cartContainer.innerHTML = '<li class="cart-item" style="justify-content:center;">មិនទាន់មានទំនិញទេ</li>';
+            } else {
+                cartItems.forEach((item, index) => {
+                    total += item.price;
+                    cartContainer.innerHTML += `
+                        <li class="cart-item">
+                            <span>${item.name}</span>
+                            <span>$${item.price.toFixed(2)} <i class="fa-solid fa-trash cart-item-remove" onclick="removeCartItem(${index})"></i></span>
+                        </li>
+                    `;
+                });
+            }
+            cartTotal.textContent = `សរុបទាំងអស់: ${total.toFixed(2)}$`;
+        }
+
+        window.removeCartItem = function(index) {
+            cartItems.splice(index, 1);
+            updateCartUI();
+        };
+
+        // 4. ទូទាត់ប្រាក់ចេញ QR Code
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const qrBox = document.getElementById('payment-qr-box');
+        checkoutBtn.addEventListener('click', () => {
+            if(cartItems.length > 0) {
+                qrBox.classList.toggle('active-qr');
+            } else {
+                alert("សូមជ្រើសរើសទំនិញជាមុនសិន!");
+            }
+        });
+
+        // 5. មុខងារ Authentication (Admin Password: ly2324)
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const showRegister = document.getElementById('show-register');
+        const showLogin = document.getElementById('show-login');
+        const formTitle = document.getElementById('form-title');
+        
+        const loginRegisterView = document.getElementById('login-register-view');
+        const profileView = document.getElementById('profile-view');
+        const profileContent = document.getElementById('profile-content');
+        const adminPanel = document.getElementById('admin-panel');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        showRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+            formTitle.innerHTML = '<i class="fa-solid fa-user-plus"></i> បង្កើតគណនីថ្មី';
+        });
+
+        showLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+            formTitle.innerHTML = '<i class="fa-solid fa-user-circle"></i> ចូលគណនី';
+        });
+
+        // Login Logic
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const user = document.getElementById('login-email').value;
+            const pass = document.getElementById('login-password').value;
+
+            loginRegisterView.style.display = 'none';
+            profileView.style.display = 'block';
+
+            if(user.toLowerCase() === 'admin' && pass === 'ly2324') {
+                profileContent.innerHTML = '<strong>សួស្តី អ្នកគ្រប់គ្រង (Admin)!</strong><br>អ្នកអាចបន្ថែមផលិតផលថ្មីចូលទៅកាន់គេហទំព័របានតាមរយៈ Form ខាងក្រោម។';
+                adminPanel.style.display = 'block';
+            } else {
+                profileContent.innerHTML = `<strong>សួស្តីអតិថិជន: ${user}</strong><br>សូមស្វាគមន៍មកកាន់គេហទំព័រកសិកម្មទំនើប។`;
+                adminPanel.style.display = 'none';
+            }
+        });
+
+        // Register Logic (Mockup)
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert("ការចុះឈ្មោះទទួលបានជោគជ័យ! សូមចូលគណនី។");
+            showLogin.click();
+        });
+
+        // Logout Logic
+        logoutBtn.addEventListener('click', () => {
+            profileView.style.display = 'none';
+            loginRegisterView.style.display = 'block';
+            loginForm.reset();
+        });
+
+        // 6. Admin ផុសផលិតផលថ្មី
+        const postProductForm = document.getElementById('post-product-form');
+        const productList = document.getElementById('dynamic-product-list');
+
+        postProductForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('prod-name').value;
+            const imgUrl = document.getElementById('prod-img').value;
+            const desc = document.getElementById('prod-desc').value;
+
+            const newCard = document.createElement('div');
+            newCard.className = 'card';
+            newCard.innerHTML = `
+                <div class="card-img">
+                    <img src="${imgUrl}" alt="${name}" class="zoomable-img">
+                    <span class="tag" style="background: #e74c3c;">ថ្មី</span>
+                </div>
+                <div class="card-body">
+                    <h3>${name}</h3>
+                    <p>${desc}</p>
+                    <a href="#contact" class="read-more">បញ្ជាទិញឥឡូវនេះ <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            `;
+            
+            // បញ្ចូលនៅខាងដើមគេ
+            productList.insertBefore(newCard, productList.firstChild);
+            
+            postProductForm.reset();
+            alert('ផលិតផលថ្មីត្រូវបានផុសចូលគេហទំព័រដោយជោគជ័យ!');
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

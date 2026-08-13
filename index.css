@@ -113,6 +113,14 @@ nav ul li a.active::after {
     transform: translateY(-2px);
 }
 
+/* --- ប៊ូតុង សញ្ញាត្រេបី (Hamburger Menu Toggle) សម្រាប់ទូរស័ព្ទ --- */
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-dark);
+}
+
 /* --- ផ្នែក Hero Section --- */
 .hero {
     height: 100vh;
@@ -684,32 +692,58 @@ footer {
 
 @media screen and (max-width: 768px) {
     header {
-        flex-direction: column;
-        padding: 12px 10px;
-        gap: 8px;
+        justify-content: space-between;
+        padding: 15px 20px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        position: fixed;
     }
 
+    /* បង្ហាញប៊ូតុងសញ្ញាត្រេបី */
+    .menu-toggle {
+        display: block;
+    }
+
+    /* លាក់ប៊ូតុង Header ធំនៅលើទូរស័ព្ទ */
+    .header-btn {
+        display: none; 
+    }
+
+    /* ទម្រង់ Dropdown List ធ្លាក់ចុះមកក្រោម */
     header nav {
-        display: block !important;
+        position: absolute;
+        top: 100%;
+        left: 0;
         width: 100%;
+        background-color: var(--white);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-in-out;
+        border-top: 1px solid #eee;
+    }
+
+    /* ពេលបើក Menu (Add class active) ឱ្យវាធ្លាក់ចុះមកក្រោម */
+    header nav.active {
+        max-height: 300px;
     }
 
     header nav ul {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 6px;
-        padding: 0;
-        margin: 5px 0 0 0;
+        flex-direction: column;
+        gap: 0;
+        padding: 10px 0;
+        align-items: stretch;
     }
 
     header nav ul li a {
-        font-size: 12px;
-        padding: 5px 10px;
-        background-color: var(--bg-light);
-        border-radius: 20px;
-        font-weight: 600;
-        display: inline-block;
+        font-size: 15px;
+        padding: 12px 25px;
+        background-color: transparent;
+        border-radius: 0;
+        font-weight: 500;
+        display: block;
+        border-bottom: 1px solid #f9f9f9;
+        color: var(--text-dark);
     }
 
     header nav ul li a::after {
@@ -718,8 +752,9 @@ footer {
 
     header nav ul li a:hover,
     header nav ul li a.active {
-        background-color: var(--primary-color);
-        color: var(--white);
+        background-color: var(--bg-light);
+        color: var(--primary-color);
+        padding-left: 30px;
     }
 
     .hero-content h1 {

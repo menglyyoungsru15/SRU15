@@ -655,13 +655,13 @@ footer {
     font-size: 14px;
 }
 
-/* --- ការកំណត់សម្រាប់អេក្រង់តូច (Responsive Design) --- */
-@media (max-width: 992px) {
+/* ========================================================== */
+/* ការកែសម្រួលសម្រាប់ទូរស័ព្ទដៃ និង Computer (Responsive)     */
+/* ========================================================== */
+
+@media screen and (max-width: 992px) {
     header {
         padding: 15px 5%;
-    }
-    nav {
-        display: none; /* អាចបន្ថែម Menu Toggle ពេលក្រោយបើត្រូវការ */
     }
     .hero-content h1 {
         font-size: 38px;
@@ -682,14 +682,93 @@ footer {
     }
 }
 
-@media (max-width: 576px) {
-    .hero-content h1 {
-        font-size: 30px;
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 12px 10px;
+        gap: 8px;
     }
+
+    header nav {
+        display: block !important;
+        width: 100%;
+    }
+
+    header nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+        padding: 0;
+        margin: 5px 0 0 0;
+    }
+
+    header nav ul li a {
+        font-size: 12px;
+        padding: 5px 10px;
+        background-color: var(--bg-light);
+        border-radius: 20px;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+    header nav ul li a::after {
+        display: none;
+    }
+
+    header nav ul li a:hover,
+    header nav ul li a.active {
+        background-color: var(--primary-color);
+        color: var(--white);
+    }
+
+    .hero-content h1 {
+        font-size: 26px;
+        line-height: 1.3;
+    }
+
+    .hero-content p {
+        font-size: 14px;
+    }
+
     .hero-btns {
         flex-direction: column;
+        gap: 10px;
     }
+
+    .hero-btns a {
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 0 10px;
+    }
+
+    .stat-box h3 {
+        font-size: 20px;
+    }
+
+    .stat-box p {
+        font-size: 12px;
+    }
+
+    .card-container, 
+    .pricing-container {
+        grid-template-columns: 1fr;
+        padding: 0 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
     .stats {
         grid-template-columns: 1fr;
+    }
+    
+    .logo h2 {
+        font-size: 18px;
     }
 }

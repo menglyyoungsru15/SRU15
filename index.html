@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts ភាសាខ្មែរ -->
     <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
             font-family: 'Kantumruy Pro', sans-serif;
@@ -339,6 +340,9 @@
             </a>
             <a href="#contact" class="header-btn">ប្រឹក្សាយោបល់</a>
         </div>
+        <div class="menu-toggle" id="mobile-menu">
+    <i class="fa-solid fa-bars"></i>
+</div>
     </header>
 
     <!-- ផ្នែកណែនាំរហ័សសម្រាប់អ្នកប្រើប្រាស់ -->
@@ -477,7 +481,7 @@
                 </div>
                 <div class="card-body">
                     <h3>ថ្នាំការពារសត្វល្អិតសរីរាង្គ</h3>
-                    <p>ផលិតផលជីវសាស្រ្តទប់ស្កាត់សត្វល្អិតបំផ្លាញដំណាំ ដោយមិនមានជាតិពុល។</p>
+                    <p>ផលិតផលជីវសាស្រ្តទប់ស្កាត់សត្វល្អិតបំផ្លាញដំណាំ ដោយមិនមានជាតិពុលตกค้าง។</p>
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
                         <span style="color: #e74c3c; font-weight: bold; font-size: 16px;">១៥$</span>
                         <button class="add-to-cart-btn" data-name="ថ្នាំការពារសត្វល្អិតសរីរាង្គ" data-price="12" style="background: #4CAF50; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-family: 'Kantumruy Pro'; font-size: 14px;">បន្ថែមទៅកន្ត្រក <i class="fa-solid fa-cart-plus"></i></button>
@@ -605,7 +609,7 @@
                         <span class="sale-price" data-price="18">២០$ <span>/ ៥០គីឡូក្រាម</span></span>
                     </div>
                     <ul>
-                        <li><i class="fa-solid fa-check" style="color: #4CAF50;"></i> គ្មានក្លិនស្អុយ ឆ្លងកាត់ការប្រើប្រាស់</li>
+                        <li><i class="fa-solid fa-check" style="color: #4CAF50;"></i> គ្មានក្លិនស្អុយ ឆ្លងកាត់ការប្រ</li>
                         <li><i class="fa-solid fa-check" style="color: #4CAF50;"></i> បង្កើនបាក់តេរីមានប្រយោជន៍ក្នុងដី</li>
                         <li><i class="fa-solid fa-check" style="color: #4CAF50;"></i> សាកសមខ្លាំងសម្រាប់ដាំដំណាំហូបផ្លែ</li>
                     </ul>
@@ -1015,6 +1019,34 @@
             alert('ផលិតផលថ្មីត្រូវបានផុសចូលគេហទំព័រដោយជោគជ័យ!');
             document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
         });
+    </script>
+    <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+const nav = document.querySelector('header nav');
+
+mobileMenu.addEventListener('click', () => {
+    nav.classList.toggle('active');
+    
+    // ប្ដូររូបតំណាងពី ត្រេបី (bars) ទៅជា សញ្ញាគុណ (xmark) ពេលបើក
+    const icon = mobileMenu.querySelector('i');
+    if (nav.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-xmark');
+    } else {
+        icon.classList.remove('fa-xmark');
+        icon.classList.add('fa-bars');
+    }
+});
+
+// បិទ Menu ស្វ័យប្រវត្ត ពេលអ្នកចុចលើ link ណាមួយក្នុងទូរស័ព្ទ
+document.querySelectorAll('header nav ul li a').forEach(link => {
+    link.addEventListener('click', () => {
+        nav.classList.remove('active');
+        const icon = mobileMenu.querySelector('i');
+        icon.classList.remove('fa-xmark');
+        icon.classList.add('fa-bars');
+    });
+});
     </script>
 </body>
 </html>
